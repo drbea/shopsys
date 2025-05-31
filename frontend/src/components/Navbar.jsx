@@ -1,21 +1,20 @@
-import React from 'react';
-import { FaUserCircle, FaCog } from 'react-icons/fa';
+import React from "react";
+import { FaUserCircle, FaCog } from "react-icons/fa";
 
 const Navbar = () => {
     return (
         <nav style={styles.navbar}>
-            <div style={styles.leftIcons}>
-                <FaCog size={24} style={styles.icon} />
-            </div>
             <div style={styles.center}>
                 <input
                     type="text"
                     placeholder="Rechercher..."
                     style={styles.searchInput}
                 />
+                <button style={styles.searchButton}>Rechercher</button>
             </div>
-            <div style={styles.rightIcons}>
-                <FaUserCircle size={28} style={styles.icon} />
+            <div style={styles.icons}>
+                <FaUserCircle size={28} style={styles.icon} title="Profil" />
+                <FaCog size={28} style={styles.icon} title="Paramètre" />
             </div>
         </nav>
     );
@@ -23,42 +22,48 @@ const Navbar = () => {
 
 const styles = {
     navbar: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        height: 60,
-        padding: '0 16px',
-        background: '#fff',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
-        position: 'relative',
-    },
-    leftIcons: {
-        flex: '0 0 auto',
-        display: 'flex',
-        alignItems: 'center',
+        width: "100%",
+        height: "60px",
+        background: "#fff",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+        padding: "0 32px",
+        position: "relative",
     },
     center: {
-        flex: '1 1 auto',
-        display: 'flex',
-        justifyContent: 'center',
-    },
-    rightIcons: {
-        flex: '0 0 auto',
-        display: 'flex',
-        alignItems: 'center',
-    },
-    icon: {
-        color: '#333',
-        margin: '0 8px',
-        cursor: 'pointer',
+        position: "absolute",
+        left: "50%",
+        transform: "translateX(-50%)",
+        display: "flex",
+        alignItems: "center",
     },
     searchInput: {
-        width: 250,
-        padding: '8px 12px',
-        borderRadius: 20,
-        border: '1px solid #ddd',
-        outline: 'none',
-        fontSize: 16,
+        padding: "8px 12px",
+        border: "1px solid #ccc",
+        borderRadius: "4px 0 0 4px",
+        outline: "none",
+        fontSize: "16px",
+    },
+    searchButton: {
+        padding: "8px 16px",
+        border: "none",
+        background: "#007bff",
+        color: "#fff",
+        borderRadius: "0 4px 4px 0",
+        cursor: "pointer",
+        fontSize: "16px",
+    },
+    icons: {
+        display: "flex",
+        alignItems: "center",
+        gap: "18px",
+        marginLeft: "auto",
+    },
+    icon: {
+        cursor: "pointer",
+        color: "#333",
     },
 };
 
