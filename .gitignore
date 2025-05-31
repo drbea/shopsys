@@ -10,6 +10,9 @@ node_modules/
 frontend/build/
 frontend/dist/
 
+
+frontend/src/Test.jsx
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
