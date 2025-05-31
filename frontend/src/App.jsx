@@ -13,6 +13,9 @@ function App() {
    <Test />
     </div>
 
+   <>
+  <Test/>
+   </>
   )
 }
 
