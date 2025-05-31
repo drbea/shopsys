@@ -8,7 +8,11 @@ node_modules/
 
 # Build artifacts for React
 frontend/build/
+frontend/src/Test.jsx
 frontend/dist/
+
+
+frontend/src/Test.jsx
 
 # Logs
 npm-debug.log*
