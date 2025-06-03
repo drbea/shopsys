@@ -6,7 +6,7 @@ export default function Sidebar({ isOpen, toggle }) {
     <div className={`bg-teal-700 text-white ${isOpen ? 'w-56' : 'w-16'} h-screen transition-all duration-300 flex flex-col`}>
       <button
         onClick={toggle}
-        className="p-4 text-center font-bold focus:outline-none hover:bg-teal-800"
+        className="p-4 text-2xl text-center font-bold focus:outline-none hover:bg-teal-800"
       >
         {isOpen ? 'SHOPSYS' : '☰'}
       </button>
