@@ -1,8 +1,7 @@
-import menugauche from "./Menugauche"
 
 function Menugauche(){
     return(
-        <details>
+        <details className="div1">
             <summary>&#9776;</summary>
         <ul>
             <li className="">Accueil</li>
