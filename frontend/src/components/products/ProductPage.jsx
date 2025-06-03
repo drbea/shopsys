@@ -98,12 +98,12 @@ const ProductsPage = () => {
   return (
     <div className="flex flex-col md:flex-row p-6 gap-6">
       <div className="flex-1">
-        <SearchBar
+        {/* <SearchBar
           search={search}
           setSearch={setSearch}
           sortBy={sortBy}
           setSortBy={setSortBy}
-        />
+        /> */}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredProducts.length > 0 ? (

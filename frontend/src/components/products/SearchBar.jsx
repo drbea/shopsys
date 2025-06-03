@@ -1,6 +1,7 @@
 import React from 'react';
 
 const SearchBar = ({ search, setSearch, sortBy, setSortBy }) => {
+  
   return (
     <div className="flex items-center gap-4 mb-4">
       <input

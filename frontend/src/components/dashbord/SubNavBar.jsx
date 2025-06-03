@@ -1,17 +1,22 @@
+import SearchBar from "../products/SearchBar";
 
-
-export default function  SubNavbar() {
-return(
-  <div className="bg-gray-100 h-12 flex items-center justify-between px-4 shadow-inner">
-    <input
-      type="text"
-      placeholder="Rechercher..."
-      className="p-2 border rounded w-1/3"
-    />
-    <div className="space-x-4">
-      <button className="p-2 bg-blue-500 text-white rounded">+ Ajouter</button>
-      <button className="p-2 bg-gray-300 rounded">🔔</button>
+export default function SubNavbar() {
+  return (
+    <div className="bg-teal-50 h-14 flex items-center justify-between px-4 shadow-inner">
+      <input
+        type="text"
+        placeholder="Rechercher..."
+        className="p-2 border border-teal-300 rounded-lg w-full max-w-sm focus:outline-none focus:ring-2 focus:ring-teal-400 transition"
+      />
+      
+      <div className="space-x-2 ml-4 flex-shrink-0">
+        <button className="p-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-sm font-medium transition">
+          + Ajouter
+        </button>
+        <button className="p-2 bg-white border border-teal-300 hover:bg-teal-100 rounded-lg text-teal-600 transition">
+          🔔
+        </button>
+      </div>
     </div>
-  </div>
-);
+  );
 }
