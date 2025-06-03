@@ -1,7 +1,7 @@
 
 export default function  Sidebar({ isOpen, toggle }){
   return (
-    <div className={`bg-gray-800 text-white ${isOpen ? 'w-64' : 'w-16'} transition-all duration-300`}>
+    <div className={`bg-gray-800 text-white ${isOpen ? 'w-54' : 'w-16'} transition-all duration-300 `}>
       <button onClick={toggle} className="p-2 text-center w-full">
         {isOpen ? 'SHOPSYS' : '☰'}
       </button>

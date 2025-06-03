@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
-// import SubNavbar from './SubNavbar';
+import SubNavbar from './SubNavbar';
 
 export default function  DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -13,11 +13,12 @@ export default function  DashboardLayout({ children }) {
 
       {/* Main Area */}
       <div className="flex-1 flex flex-col">
+      {/* <div className=""> */}
         {/* Top bar */}
         <TopBar />
 
         {/* Sub nav */}
-        {/*<SubNavbar />*/}
+        <SubNavbar />
 
         {/* Page content */}
         <main className="p-4 overflow-auto">

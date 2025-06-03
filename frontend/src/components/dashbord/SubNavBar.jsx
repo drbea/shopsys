@@ -1,6 +1,7 @@
 
 
-export default function  SubNavbar()(
+export default function  SubNavbar() {
+return(
   <div className="bg-gray-100 h-12 flex items-center justify-between px-4 shadow-inner">
     <input
       type="text"
@@ -13,4 +14,4 @@ export default function  SubNavbar()(
     </div>
   </div>
 );
-
+}
