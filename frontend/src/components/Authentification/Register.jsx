@@ -1,5 +1,5 @@
 // Register.jsx
-
+import { useNavigate, Link } from 'react-router-dom';
 import React from 'react';
 
 export default function Register() {
@@ -73,12 +73,12 @@ export default function Register() {
 
         <p className="text-center text-gray-600 text-sm mt-6">
           Vous avez déjà un compte ?{' '}
-          <a
-            href="/connexion"
+          <Link
+            to="/login"
             className="font-medium text-teal-600 hover:text-teal-800"
           >
             Connectez-vous
-          </a>
+          </Link>
         </p>
       </div>
 

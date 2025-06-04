@@ -1,6 +1,13 @@
+import DashboardLayout from "../dashbord/DashboardLayout"
+import GererStock from "../products/GererStock"
+
 function Stock(){
     return(
-        <h1>Page de stocks</h1>
+
+    <DashboardLayout>
+      <GererStock />
+    </DashboardLayout>
+        
     )
 }
 export default Stock;

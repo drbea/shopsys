@@ -8,13 +8,11 @@ import ProductPage from "../products/ProductPage"
 function Product() {
 
   return (
-   // <div className="container mx-auto flex flex-col md:flex-row p-6 gap-6">
-   <div className="container mx-auto">
-      {/*<Login/>*/}
+   // <div className="container mx-auto">
     <DashboardLayout>
       <ProductPage/>
     </DashboardLayout>
-   </div>
+   // </div>
   )
 }
 

@@ -1,8 +1,11 @@
 import React from 'react'
+import DashboardLayout from "../dashbord/DashboardLayout"
 
 export default function Panier() {
   return (
-    <div>Page Panier</div>
+    <DashboardLayout>
+          <div>Page Panier</div>
+    </DashboardLayout>
   )
 }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
-import SubNavbar from './SubNavbar';
+import SubNavbar from './SubNavBar';
 
 export default function  DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);

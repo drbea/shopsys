@@ -2,13 +2,13 @@
 
 import React from 'react';
 // Si vous utilisez react-router-dom pour d'éventuelles redirections après connexion
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 // Vous pouvez réutiliser le logo ici si vous le souhaitez
 const logoUrl = '/path/to/your/shopsys-logo.png'; // REMPLACEZ CECI PAR LE VRAI CHEMIN DE VOTRE LOGO
 
 const Login = () => {
-  // const navigate = useNavigate(); // Pour la redirection après connexion
+  const navigate = useNavigate(); // Pour la redirection après connexion
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,12 +21,11 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 via-teal-50 to-sky-100 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Vous pouvez ajouter le logo ici aussi si vous le souhaitez */}
         <div className="flex justify-center mb-8">
           <img
             src={logoUrl}
             alt="Shopsys Logo"
-            className="h-20 w-auto" // Ajustez la taille au besoin
+            className="h-20 w-auto" 
           />
         </div>
 
@@ -91,12 +90,12 @@ const Login = () => {
 
         <p className="text-center text-gray-600 text-sm">
           Vous n'avez pas de compte ?{' '}
-          <a
-            href="/inscription" // Remplacez par votre route d'inscription
+          <Link
+            to="/register" // Remplacez par votre route d'inscription
             className="font-medium text-teal-600 hover:text-teal-800"
           >
             Inscrivez-vous
-          </a>
+          </Link>
         </p>
       </div>
       <footer className="absolute bottom-4 text-center w-full mt-8">

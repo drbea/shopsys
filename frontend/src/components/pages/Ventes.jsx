@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import DashboardLayout from "../dashbord/DashboardLayout"
+
 
 const ventesData = [
   {
@@ -37,7 +39,8 @@ export default function Ventes() {
   const totalGlobal = ventesFiltrees.reduce((acc, curr) => acc + curr.total, 0);
 
   return (
-    <div className="p-4 sm:p-6 bg-white rounded-xl shadow-md">
+    <DashboardLayout>
+          <div className="p-4 sm:p-6 bg-white rounded-xl shadow-md">
       <h1 className="text-2xl sm:text-3xl font-bold text-teal-700 mb-6">Historique des Ventes</h1>
 
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
@@ -95,5 +98,7 @@ export default function Ventes() {
         <p className="text-gray-600">Nombre de ventes : {ventesFiltrees.length}</p>
       </div>
     </div>
+    </DashboardLayout>
+
   );
 }

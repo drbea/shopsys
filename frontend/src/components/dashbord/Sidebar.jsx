@@ -13,11 +13,11 @@ export default function Sidebar({ isOpen, toggle }) {
 
       {isOpen && (
         <nav className="mt-6 space-y-2 px-4 text-sm font-medium">
-          <Link to="/" className="block hover:bg-teal-800 p-2 rounded transition">Accueil</Link>
+          <Link to="/home" className="block hover:bg-teal-800 p-2 rounded transition">Accueil</Link>
 
           <Link to="/products"  className="block hover:bg-teal-800 p-2 rounded transition">Produits</Link>
           <Link to="/ventes" className="block hover:bg-teal-800 p-2 rounded transition">Ventes</Link>
-          {/* <Link to="" className="block hover:bg-teal-800 p-2 rounded transition">Clients</a>: */}
+          <Link to="/stocks" className="block hover:bg-teal-800 p-2 rounded transition">Stock</Link>
         </nav>
       )}
     </div>
