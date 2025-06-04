@@ -38,8 +38,8 @@ function Home() {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-xl font-semibold mb-4 text-gray-700">Actions rapides</h3>
             <ul className="space-y-2 text-teal-700 font-medium">
-              <li><Link to="/products" className="hover:underline">➕ Ajouter un produit</Link></li>
-              <li><Link to="/ventes" className="hover:underline">🧾 Enregistrer une vente</Link></li>
+              <li><Link to="/ajoutproduit" className="hover:underline">➕ Ajouter un produit</Link></li>
+              <li><Link to="/ajoutvente" className="hover:underline">🧾 Enregistrer une vente</Link></li>
               <li><Link to="/stocks" className="hover:underline">📦 Gérer les stocks</Link></li>
             </ul>
           </div>
