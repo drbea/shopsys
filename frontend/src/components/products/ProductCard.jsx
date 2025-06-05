@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from "react-router-dom"
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onAddClick }) => {
   const {
     name,
     price,
@@ -26,9 +27,13 @@ const ProductCard = ({ product }) => {
           {description}
         </p>
         <div className="mt-2 text-sm text-gray-600">
-          <p>En stock : <span className="font-medium">{stock}</span></p>
+          {/*<p>En stock : <span className="font-medium">{stock}</span></p>*/}
           <p>Code-barres : <span className="font-mono text-xs">{barcode}</span></p>
         </div>
+      </div>
+      <div className="p-4 flex justify-start">
+        <Link to="" className="bg-green-600 p-2 text-xl font-semibold rounded mr-2 py-auto w-auto text-center hover:bg-white hover:bg-green-600 hover:outline-2 hover:outline-offset-2 hover:outline-green-500  ...">Detail</Link>
+        <button onClick={() => onAddClick(product)} className="bg-green-600 p-2 text-xl font-semibold rounded w-auto text-center hover:bg-white hover:bg-green-600 hover:outline-2 hover:outline-offset-2 hover:outline-green-500  ...">Ajouter au panier</button>
       </div>
     </div>
   );
