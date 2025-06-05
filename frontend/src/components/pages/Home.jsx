@@ -9,7 +9,7 @@ function Home() {
     <DashboardLayout>
       <div className="min-h-screen bg-gradient-to-br from-green-50 via-teal-50 to-sky-50 p-6">
         <header className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-teal-700">Tableau de bord ShopSys</h1>
+          <h1 className="text-3xl font-bold text-teal-700">Dashbord ShopSys</h1>
           <Link to="/login" className="text-teal-600 hover:underline">
             Déconnexion
           </Link>
