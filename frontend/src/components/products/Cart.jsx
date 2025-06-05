@@ -24,7 +24,7 @@ const Cart = ({ cart, updateQuantity, removeFromCart, handleValidateCart, isCart
                 className="ml-2 w-16 border rounded px-2"
               />
             </p>
-            <p className="text-green-600">Total : {(item.price * item.quantity).toFixed(2)} €</p>
+            <p className="text-teal-700">Total : {(item.price * item.quantity).toFixed(2)} €</p>
             <button onClick={() => removeFromCart(item.id)} className="text-red-600 mt-2">🗑 Retirer</button>
           </div>
         ))
@@ -36,7 +36,7 @@ const Cart = ({ cart, updateQuantity, removeFromCart, handleValidateCart, isCart
 
       <button
         onClick={handleValidateCart}
-        className="bg-blue-700 text-white mt-4 px-4 py-2 rounded shadow hover:bg-blue-800 w-full"
+        className="bg-teal-700 text-white mt-4 px-4 py-2 rounded shadow hover:bg-blue-800 w-full"
       >
         Valider la commande
       </button>

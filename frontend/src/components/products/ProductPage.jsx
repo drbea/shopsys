@@ -161,7 +161,7 @@ const handleAddProduct = (product) => {
     <div className="mb-4  top-4 ">
       <button
         onClick={toggleCart}
-        className="bg-green-700 text-white px-4 py-2 rounded shadow hover:bg-withe-700"
+        className="bg-teal-700 text-white px-4 py-2 rounded shadow hover:bg-withe-700"
       >
         🛒 Voir le panier ({cart.length})
       </button>
