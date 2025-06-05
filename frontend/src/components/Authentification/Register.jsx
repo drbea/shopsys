@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 export default function Register() {
   const userData = {prenom: "", nom: "", email: "", password: ""}
   const [userForm, setUserForm] = useState(userData)
-
+  const navigate = useNavigate()
   const handleFormChange = (e)=>{
     const {name, value} = e.target
     console.log(name, value)
@@ -29,6 +29,7 @@ export default function Register() {
       if (res.ok) {
         alert('Utilisateur enregistré avec succès !');
         setUserForm(userData);
+        navigate("/login")
       } else {
         alert('Erreur: ' + data.message);
       }
