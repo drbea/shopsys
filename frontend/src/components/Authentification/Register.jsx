@@ -13,10 +13,29 @@ export default function Register() {
     setUserForm({...userForm, [name]: value})
   }
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e)=>{
     e.preventDefault();
-    const userInfo = JSON.stringify(userForm)
-    alert("userData" + userInfo)
+
+    try {
+      const options = {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(userForm),
+      };
+      const register_url = "http://localhost:5000/api/register"
+
+      const res = await fetch(register_url, options);
+      const data = await res.json();
+      if (res.ok) {
+        alert('Utilisateur enregistré avec succès !');
+        setUserForm(userData);
+      } else {
+        alert('Erreur: ' + data.message);
+      }
+    } catch (error) {
+      alert('Erreur de connexion au serveur');
+      console.error(error);
+    }
   }
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 via-teal-50 to-sky-100 flex items-center justify-center p-4">

@@ -1,17 +1,37 @@
 require('dotenv').config()
 
 const express = require("express")
-
 const cors = require("cors")
 
 const app = express()
+const database = require("./database")
 
-const frontend_url = process.env.FRONT_URL || "http://localhost:5173"
+// const frontend_url = process.env.FRONT_URL || "http://localhost:5173"
 app.use(express.json())
-app.use(cors({
-    origin: frontend_url
-    }))
+// console.log(frontend_url)
 
+app.use(cors({
+    origin: "http://localhost:5173"
+    // origin: "*"
+}))     
+
+
+app.post('/api/register', (req, res) => {
+  const { prenom, nom, email, password } = req.body;
+
+  if (!prenom || !nom || !email || !password) {
+    return res.status(400).json({ message: 'Champs requis manquants' });
+  }
+
+  const sql = "INSERT INTO utilisateur (prenom, nom, email, password) VALUES (?, ?, ?, ?)";
+  database.query(sql, [prenom, nom, email, password], (err, result) => {
+    if (err) {
+      console.error("Erreur lors de l'insertion:", err);
+      return res.status(500).json({ message: "Erreur serveur" });
+    }
+    res.status(201).json({ message: "Utilisateur enregistré avec succès" });
+  });
+});
 
 
 const PORT = process.env.PORT || 5000
