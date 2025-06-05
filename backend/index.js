@@ -14,8 +14,6 @@ app.use(cors({
 
 
 
-
-
 const PORT = process.env.PORT || 5000
 app.listen(PORT, (error) => {
 	if (!error) {
@@ -24,3 +22,4 @@ app.listen(PORT, (error) => {
 		console.log("Error occur server can't start ", error)
 	}
 })
+
