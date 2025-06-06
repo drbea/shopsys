@@ -15,26 +15,31 @@ import GererStock from "./components/products/GererStock"
 import EnregistrerVente from "./components/products/EnregistrerVente"
 import AjouterProduit from "./components/products/AjouterProduit"
 import Register from './components/Authentification/Register'
+import ProtectedRoute from './components/Authentification/ProtectedRoute'
 import Login from './components/Authentification/Login'
 import Product from './components/pages/Product'
+
+
 function App() {
 
   return (
    <BrowserRouter>
-   {/* <LandingPage/> */}
-    
-   <Routes>
-    <Route path='/'element={<LandingPage/>}></Route>
-    <Route path='/home'element={<Home/>}></Route>
-    <Route path='/ventes'element={<Vente/>}></Route>
-    <Route path='/stocks'element={<Stocks/>}></Route>
-    <Route path='/register' element={<Register/>}></Route>
-    <Route path='/login' element={<Login/>}></Route>
-    <Route path='/products' element={<Product/>}></Route>
-    <Route path='/ajoutproduit' element={<AjouterProduit/>}></Route>
-    <Route path='/ajoutvente' element={<EnregistrerVente/>}></Route>
-   </Routes>
-  
+
+
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+
+        {/* Routes protégées */}
+        <Route path='/home' element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path='/ventes' element={<ProtectedRoute><Vente /></ProtectedRoute>} />
+        <Route path='/stocks' element={<ProtectedRoute><Stocks /></ProtectedRoute>} />
+        <Route path='/products' element={<ProtectedRoute><Product /></ProtectedRoute>} />
+        <Route path='/userprofile' element={<ProtectedRoute><Profil /></ProtectedRoute>} />
+        <Route path='/ajoutproduit' element={<ProtectedRoute><AjouterProduit /></ProtectedRoute>} />
+        <Route path='/ajoutvente' element={<ProtectedRoute><EnregistrerVente /></ProtectedRoute>} />
+      </Routes>
    </BrowserRouter>
   )
 }

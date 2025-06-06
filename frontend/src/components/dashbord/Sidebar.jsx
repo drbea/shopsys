@@ -18,7 +18,7 @@ export default function Sidebar({ isOpen, toggle }) {
           <Link to="/products"  className="block hover:bg-teal-800 p-2 rounded transition">Produits</Link>
           <Link to="/ventes" className="block hover:bg-teal-800 p-2 rounded transition">Ventes</Link>
           <Link to="/stocks" className="block hover:bg-teal-800 p-2 rounded transition">Stock</Link>
-          <Link to="/panier" className="block hover:bg-teal-800 p-2 rounded transition">Panier</Link>
+          <Link to="/userprofile" className="block hover:bg-teal-800 p-2 rounded transition">Profile</Link>
         </nav>
       )}
     </div>

@@ -5,16 +5,28 @@ const cors = require("cors")
 
 const app = express()
 const database = require("./database")
+const session = require('express-session');
 
-// const frontend_url = process.env.FRONT_URL || "http://localhost:5173"
+const frontend_url = process.env.FRONT_URL || "http://localhost:5173"
+console.log(frontend_url)
 app.use(express.json())
 // console.log(frontend_url)
 
 app.use(cors({
-    origin: "http://localhost:5173"
-    // origin: "*"
+    origin: "http://localhost:5173",
+    credentials: true,
 }))     
 
+app.use(session({
+  secret: 'react&expressjs@app', // change cette valeur
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // true en production avec HTTPS
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000 // 1 jour
+  }
+}));
 
 app.post('/api/register', (req, res) => {
   const { prenom, nom, email, password } = req.body;
@@ -32,6 +44,13 @@ app.post('/api/register', (req, res) => {
     res.status(201).json({ message: "Utilisateur enregistré avec succès" });
   });
 });
+
+
+
+
+// Routes
+const authRoutes = require("./routes/auth");
+app.use("/api", authRoutes);
 
 
 const PORT = process.env.PORT || 5000
