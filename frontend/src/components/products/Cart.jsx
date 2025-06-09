@@ -3,7 +3,7 @@ import React from 'react';
 const Cart = ({ cart, updateQuantity, removeFromCart, handleValidateCart, isCartOpen, toggleCart }) => {
   if (!isCartOpen) return null;
 
-  const totalAmount = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const totalAmount = cart.reduce((acc, item) => acc + item.prix * item.quantite, 0);
 
   return (
     <div className="fixed right-0 top-0 w-full md:w-1/3 bg-white h-full shadow-lg p-6 z-40 overflow-y-auto">
@@ -14,17 +14,17 @@ const Cart = ({ cart, updateQuantity, removeFromCart, handleValidateCart, isCart
       ) : (
         cart.map(item => (
           <div key={item.id} className="mb-4 border-b pb-2">
-            <p className="font-bold">{item.name}</p>
-            <p>Prix unitaire : {item.price.toFixed(2)} €</p>
+            <p className="font-bold">{item.nom}</p>
+            <p>Prix unitaire : {item.prix.toFixed(2)} €</p>
             <p>Quantité :
               <input
                 type="number"
-                value={item.quantity}
+                value={item.quantite}
                 onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
                 className="ml-2 w-16 border rounded px-2"
               />
             </p>
-            <p className="text-teal-700">Total : {(item.price * item.quantity).toFixed(2)} €</p>
+            <p className="text-teal-700">Total : {(item.prix * item.quantite).toFixed(2)} €</p>
             <button onClick={() => removeFromCart(item.id)} className="text-red-600 mt-2">🗑 Retirer</button>
           </div>
         ))

@@ -1,12 +1,9 @@
 // LandingPage.jsx
 
 import React from 'react';
-// Si vous utilisez react-router-dom pour la navigation :
 import { Link } from 'react-router-dom';
-// import logoaccueil from "../../assets/logoaccueil.jpeg"
 
-// Assurez-vous que le chemin vers votre logo est correct
-const logoUrl = '/src/assets/logoaccueil.jpeg'; // REMPLACEZ CECI PAR LE VRAI CHEMIN DE VOTRE LOGO
+const logoUrl = '/src/assets/logoaccueil.jpeg'; 
 
 const LandingPage = () => {
   return (
@@ -14,9 +11,9 @@ const LandingPage = () => {
       <header className="flex flex-col items-center mb-8">
         {/* Logo Shopsys */}
         <img
-          src={logoUrl} // Utilisez la variable pour le chemin du logo
+          src={logoUrl} 
           alt="Shopsys Logo"
-          className="h-150 w-200 mb-6" // Ajustez la taille (h-24) au besoin
+          className="h-150 w-200 mb-6"
         />
       </header>
 

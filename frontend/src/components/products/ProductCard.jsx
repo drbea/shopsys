@@ -3,13 +3,14 @@ import { Link } from "react-router-dom"
 
 const ProductCard = ({ product, onAddClick }) => {
   const {
-    name,
-    price,
-    category,
-    description,
-    stock,
+    nom,
+    prix,
+    categorie_nom,
+    quantite,
+    detail,
     image,
-    barcode,
+    codebarre,
+    addedAt
   } = product;
 
   return (
@@ -17,18 +18,18 @@ const ProductCard = ({ product, onAddClick }) => {
       <img
         className="w-full h-48 object-cover"
         src={image}
-        alt={`Image de ${name}`}
+        alt={`Image de ${nom}`}
       />
       <div className="p-4">
-        <h2 className="text-xl font-semibold text-gray-800">{name}</h2>
-        <p className="text-sm text-gray-500">{category}</p>
-        <p className="text-lg font-bold text-teal-700 mt-1">{price} €</p>
+        <h2 className="text-xl font-semibold text-gray-800">{nom}</h2>
+        <p className="text-sm text-gray-500">{categorie_nom}</p>
+        <p className="text-lg font-bold text-teal-700 mt-1">{prix} €</p>
         <p className="text-sm text-gray-700 mt-2 line-clamp-2">
-          {description}
+          {detail}
         </p>
         <div className="mt-2 text-sm text-gray-600">
           {/*<p>En stock : <span className="font-medium">{stock}</span></p>*/}
-          <p>Code-barres : <span className="font-mono text-xs">{barcode}</span></p>
+          <p>Code-barres : <span className="font-mono text-xs">{codebarre}</span></p>
         </div>
       </div>
       <div className="p-4 flex justify-start">

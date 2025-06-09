@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-const logoUrl = '/path/to/your/shopsys-logo.png'; // Remplace par le vrai chemin
+const logoUrl = '/logo.jpeg'; // Remplace par le vrai chemin
 
 const Login = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:5000/api/login', {
+      const res = await fetch('http://localhost:8008/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: "include",
@@ -45,7 +45,7 @@ const Login = () => {
     <div className="min-h-screen bg-gradient-to-br from-green-100 via-teal-50 to-sky-100 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="flex justify-center mb-8">
-          <img src={logoUrl} alt="Shopsys Logo" className="h-20 w-auto" />
+          <img src={logoUrl} alt="Shopsys Logo" className="h-50 w-auto" />
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white shadow-xl rounded-xl px-8 pt-6 pb-8 mb-4">

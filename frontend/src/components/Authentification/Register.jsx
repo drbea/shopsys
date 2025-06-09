@@ -22,7 +22,7 @@ export default function Register() {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(userForm),
       };
-      const register_url = "http://localhost:5000/api/register"
+      const register_url = "http://localhost:8008/api/register"
 
       const res = await fetch(register_url, options);
       const data = await res.json();

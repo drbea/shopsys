@@ -1,8 +1,4 @@
-
 import { useEffect, useState } from "react";
-
-
-
 
 const UseAuth = () => {
   const [user, setUser] = useState(null);
@@ -11,7 +7,7 @@ const UseAuth = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/me", {
+        const res = await fetch("http://localhost:8008/api/me", {
           credentials: "include",
         });
 

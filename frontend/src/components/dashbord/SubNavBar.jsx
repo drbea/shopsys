@@ -1,4 +1,5 @@
 import SearchBar from "../products/SearchBar";
+import { Link } from 'react-router-dom';
 
 export default function SubNavbar() {
   return (
@@ -10,9 +11,9 @@ export default function SubNavbar() {
       />
       
       <div className="space-x-2 ml-4 flex-shrink-0">
-        <button className="p-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-sm font-medium transition">
+        <Link to="/ajoutproduit" className="p-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-sm font-medium transition">
           + Ajouter
-        </button>
+        </Link>
         <button className="p-2 bg-white border border-teal-300 hover:bg-teal-100 rounded-lg text-teal-600 transition">
           🔔
         </button>

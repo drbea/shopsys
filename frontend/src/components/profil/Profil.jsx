@@ -4,17 +4,21 @@ import DashboardLayout from "../dashbord/DashboardLayout"
 
 export default function Profil() {
   const [user, setUser] = useState({
+    id: "",
     email: "",
-    nom: "",
     prenom: "",
-    password: "",
+    nom: "",
   });
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    const savedUser = localStorage.getItem("user");
+    // const {savedUser, loader} = localStorage.getItem("user")
+    
+    const {savedUser, loading } = UseAuth()
+    console.log(savedUser, loading)
     if (savedUser) {
-      setUser(JSON.parse(savedUser));
+      // setUser(JSON.parse(savedUser));
+      setUser(savedUser);
     }
   }, []);
 
@@ -77,7 +81,7 @@ export default function Profil() {
                     className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-600"
                   />
                 </div>
-                <div>
+{/*                <div>
                   <label className="block text-sm font-medium text-teal-700">
                     Mot de passe :
                   </label>
@@ -90,7 +94,7 @@ export default function Profil() {
                     className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-600"
                   />
                 </div>
-                <div className="flex justify-between">
+*/}                <div className="flex justify-between">
                   <button
                     type="submit"
                     className="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition"
@@ -141,3 +145,38 @@ export default function Profil() {
     </DashboardLayout>
   );
 }
+
+
+
+
+
+
+/*
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://beavoguimaximeakoi:<db_password>@cluster0.nqm2qxp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+async function run() {
+  try {
+    // Connect the client to the server (optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
+
+*/
