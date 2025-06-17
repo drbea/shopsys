@@ -26,8 +26,8 @@ const ProductsPage = () => {
   } 
   useEffect(() => {
     loadProducts();
+
   }, []);
-  // console.log(products.forEach(el => {console.log(el.id, el.nom, el.prix, el.quantite, el.codebarre)}))
   const toggleCart = () => setIsCartOpen(!isCartOpen);
 
   const updateQuantity = (productId, newQty) => {
@@ -108,24 +108,36 @@ const ProductsPage = () => {
     alert("Produit ajouté au panier : " + product.nom);
   };
 
+  const handleDelete = (id) => {
+    if (window.confirm("Supprimer ce produit ?")) {
+      fetch(`http://localhost:8008/api/produits/${id}`, {
+        method: 'DELETE'
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message);
+        loadProducts();
+      })
+      .catch(err => {
+        console.error("Erreur suppression :", err);
+        alert("Erreur lors de la suppression");
+      });
+    }
+  };
+
   const filteredProducts = products
     .filter(p => p.nom.toLowerCase().includes(search.toLowerCase()))
     .sort((a, b) => {
       if (sortBy === 'prix') return a.prix - b.prix;
       if (sortBy === 'quantite') return a.quantite - b.quantite;
       if (sortBy === 'nom') return a.nom.localeCompare(b.nom);
-      if (sortBy === 'categorie') return a.categorie.localeCompare(b.categorie);
+      if (sortBy === 'categorie') return a.categorie_nom.localeCompare(b.categorie_nom);
       return 0;
     });
-
-  // const recentProducts = [...products]
-  //   .sort((a, b) => b.addedAt - a.addedAt)
-  //   .slice(0, 3);
 
   const recentProducts = [...products]
   .sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt))
   .slice(0, 3);
-  // console.log("contenu panier: ", cart)
 
   return (
     <div className="flex flex-col md:flex-row p-6 gap-6">
@@ -145,10 +157,14 @@ const ProductsPage = () => {
           )}
         </div>
 
+        {/*Barre de rechere et de tri
+          ({ search, setSearch, sortBy, setSortBy }
+        */}
+        <SearchBar search={search} setSearch={setSearch} sortBy={sortBy} setSortBy={setSortBy} />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:xl:grid-cols-3 gap-6">
           {filteredProducts.length > 0 ? (
             filteredProducts.map(product => (
-              <ProductCard key={product.id} product={product} onAddClick={handleAddProduct} />
+              <ProductCard key={product.id} product={product} onAddClick={handleAddProduct} handleDelete={handleDelete} onProductUpdated={ loadProducts }/>
             ))
           ) : (
             <p className="text-gray-500 text-center col-span-full">Aucun produit trouvé.</p>

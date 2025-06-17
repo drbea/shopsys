@@ -70,6 +70,46 @@ router.get('/produits', (req, res) => {
 });
 
 
+// Supprimer un produit par ID
+router.delete('/produits/:id', (req, res) => {
+  const { id } = req.params;
+
+  const sql = 'DELETE FROM produit WHERE id = ?';
+  database.query(sql, [id], (err, result) => {
+    if (err) {
+      console.error("Erreur lors de la suppression :", err);
+      return res.status(500).json({ message: "Erreur serveur." });
+    }
+    res.json({ message: "Produit supprimé avec succès." });
+  });
+});
+
+
+router.put('/produits/:id', upload.single('image'), (req, res) => {
+  const { nom, prix, quantite, categorie, codebarre } = req.body;
+  const { id } = req.params;
+  const image = req.file ? `http://localhost:${PORT}/media/${req.file.filename}` : null;
+
+  const updateFields = [
+    "nom = ?", "prix = ?", "quantite = ?", "categorie = ?", "codebarre = ?"
+  ];
+  const params = [nom, prix, quantite, categorie, codebarre];
+
+  if (image) {
+    updateFields.push("image = ?");
+    params.push(image);
+  }
+
+  params.push(id);
+
+  const sql = `UPDATE produit SET ${updateFields.join(", ")} WHERE id = ?`;
+  database.query(sql, params, (err) => {
+    if (err) return res.status(500).json({ error: "Erreur lors de la mise à jour" });
+    res.json({ message: "Produit mis à jour" });
+  });
+});
+
+
 // Enregistrer une vente et mettre à jour la quantité du produit
 router.post('/ventes', (req, res) => {
   const { nom_produit, client, ref_client, quantite, prix_total } = req.body;

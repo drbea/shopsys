@@ -17,9 +17,10 @@ const SearchBar = ({ search, setSearch, sortBy, setSortBy }) => {
         onChange={(e) => setSortBy(e.target.value)}
       >
         <option value="">Trier par</option>
-        <option value="category">Catégorie</option>
-        <option value="price">Prix</option>
-        <option value="stock">Quantité en stock</option>
+        <option value="categorie">Catégorie</option>
+        <option value="nom">Nom</option>
+        <option value="prix">Prix</option>
+        <option value="quantite">Quantité en stock</option>
       </select>
     </div>
   );
