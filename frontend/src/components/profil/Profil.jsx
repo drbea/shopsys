@@ -3,6 +3,7 @@ import UseAuth from "../Authentification/UseAuth"
 import DashboardLayout from "../dashbord/DashboardLayout"
 
 export default function Profil() {
+  const {savedUser, loading } = UseAuth()
   const [user, setUser] = useState({
     id: "",
     email: "",
@@ -12,16 +13,19 @@ export default function Profil() {
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    // const {savedUser, loader} = localStorage.getItem("user")
-    
-    const {savedUser, loading } = UseAuth()
-    console.log(savedUser, loading)
-    if (savedUser) {
-      // setUser(JSON.parse(savedUser));
-      setUser(savedUser);
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      setUser(JSON.parse(userData));
+    } else {
+      console.log("no user");
     }
   }, []);
 
+  useEffect(() => {
+    if (savedUser) {
+      setUser(savedUser);
+    }
+  }, [savedUser]);
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };

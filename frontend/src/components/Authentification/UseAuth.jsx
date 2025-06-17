@@ -10,7 +10,6 @@ const UseAuth = () => {
         const res = await fetch("http://localhost:8008/api/me", {
           credentials: "include",
         });
-
         if (res.ok) {
           const data = await res.json();
           setUser(data.user);
@@ -27,7 +26,6 @@ const UseAuth = () => {
 
     checkAuth();
   }, []);
-  // console.log(user)
   return { user, loading };
 };
 

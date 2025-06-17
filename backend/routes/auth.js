@@ -6,32 +6,50 @@ const database = require("../database");
 const router = express.Router();
 
 // Inscription
-// router.post("/register", async (req, res) => {
+router.post("/register", async (req, res) => {
+  const { prenom, nom, email, password } = req.body;
+
+  database.query("SELECT * FROM utilisateur WHERE email = ?", [email], async (err, results) => {
+    if (err) return res.status(500).json({ message: "Erreur serveur", error: err });
+
+    if (results.length > 0) {
+      return res.status(400).json({ message: "Email déjà utilisé" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    database.query("INSERT INTO utilisateur (prenom, nom, email, password) VALUES (?, ?, ?, ?)",
+      [prenom, nom, email, hashedPassword],
+      (err) => {
+        if (err) return res.status(500).json({ message: "Erreur lors de l'inscription", error: err });
+
+        res.status(201).json({ message: "Inscription réussie" });
+      });
+  });
+});
+
+// app.post('/api/register', (req, res) => {
 //   const { prenom, nom, email, password } = req.body;
 
-//   db.query("SELECT * FROM users WHERE email = ?", [email], async (err, results) => {
-//     if (err) return res.status(500).json({ message: "Erreur serveur", error: err });
+//   if (!prenom || !nom || !email || !password) {
+//     return res.status(400).json({ message: 'Champs requis manquants' });
+//   }
 
-//     if (results.length > 0) {
-//       return res.status(400).json({ message: "Email déjà utilisé" });
+//   const sql = "INSERT INTO utilisateur (prenom, nom, email, password) VALUES (?, ?, ?, ?)";
+//   database.query(sql, [prenom, nom, email, password], (err, result) => {
+//     if (err) {
+//       console.error("Erreur lors de l'insertion:", err);
+//       return res.status(500).json({ message: "Erreur serveur" });
 //     }
-
-//     const hashedPassword = await bcrypt.hash(password, 10);
-
-//     db.query("INSERT INTO users (prenom, nom, email, password) VALUES (?, ?, ?, ?)",
-//       [prenom, nom, email, hashedPassword],
-//       (err) => {
-//         if (err) return res.status(500).json({ message: "Erreur lors de l'inscription", error: err });
-
-//         res.status(201).json({ message: "Inscription réussie" });
-//       });
+//     res.status(201).json({ message: "Utilisateur enregistré avec succès" });
 //   });
 // });
+
+
 
 // Connexion
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
-  // console.log(email, password)
   database.query("SELECT * FROM utilisateur WHERE email = ?", [email], async (err, results) => {
     // console.error("Erreur SQL:", err);
     if (err) return res.status(500).json({ message: "Erreur serveur", error: err });
@@ -41,10 +59,8 @@ router.post("/login", (req, res) => {
     }
 
     const user = results[0];
-    console.log("\n\nuser: ", user.password, password)
     // const isMatch = await bcrypt.compare(password, user.password);
     const isMatch = password == user.password
-    console.log(isMatch)
 
     if (!isMatch) {
       return res.status(400).json({ message: "Mot de passe incorrect" });
@@ -57,7 +73,7 @@ router.post("/login", (req, res) => {
       prenom: user.prenom,
       nom: user.nom,
     };
-
+    // console.log(user.id, user.email, user.prenom, req.session)
     res.status(200).json({ message: "Connexion réussie", user: req.session.user });
   });
 });
@@ -72,7 +88,7 @@ router.post("/logout", (req, res) => {
 });
 
 router.get("/me", (req, res) => {
-  console.log("Session utilisateur:", req.session.user);
+  console.log("Session utilisateur:", req.session);
   if (req.session.user) {
     res.json({ user: req.session.user });
   } else {

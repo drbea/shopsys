@@ -15,20 +15,17 @@ const ProductsPage = () => {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-;
-  // 🔁 Appel API à l’affichage initial
-  useEffect(() => {
+
+
+  // Appel API à l’affichage initial
+  const loadProducts = ()=> {
     fetch('http://localhost:8008/api/produits')
       .then(res => res.json())
       .then(data => setProducts(data))
-      // .then(data => {
-      //   const withDate = data.map(p => ({
-      //     ...p,
-      //     addedAt: new Date(p.addedAt || Date.now())
-      //   }));
-      //   setProducts(withDate);
-      // })
       .catch(err => console.error("Erreur lors du chargement des produits :", err));
+  } 
+  useEffect(() => {
+    loadProducts();
   }, []);
   // console.log(products.forEach(el => {console.log(el.id, el.nom, el.prix, el.quantite, el.codebarre)}))
   const toggleCart = () => setIsCartOpen(!isCartOpen);
@@ -47,10 +44,56 @@ const ProductsPage = () => {
     setCart(cart.filter(item => item.id !== productId));
   };
 
+  // Fonction React pour soumettre la vente
+  const enregistrerVente = async (vente) => {
+    try {
+        // L'URL de votre API Express
+        const apiUrl = 'http://localhost:8008/api/ventes';
+
+        const reponse = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', 
+            },
+            body: JSON.stringify(vente), 
+        });
+
+        if (!reponse.ok) {
+            // Si la réponse n'est pas un succès (status 2xx)
+            const erreurData = await reponse.json();
+            throw new Error(erreurData.message || 'Une erreur est survenue.');
+        }
+
+        const resultat = await reponse.json();
+        console.log('Succès:', resultat.message);
+        alert('Vente enregistrée avec succès !');
+
+    } catch (erreur) {
+        console.error('Erreur lors de l\'envoi de la vente:', erreur);
+        alert(`Erreur: ${erreur.message}`);
+    }
+  };
+
+
   const handleValidateCart = () => {
     console.log("Panier validé :", cart);
+    const nom_client = prompt("Entrer le nom du client: ").trim();
+    const ref_client = prompt("Entrer la référence client: ").trim();
+
+    for (const element of cart) {
+      const newVente = {
+        nom_produit: element.nom,
+        client: nom_client,
+        ref_client: ref_client,
+        quantite: element.quantite,
+        prix_total: element.prix * element.quantite
+      };
+      enregistrerVente(newVente);
+    }
+
     alert("Commande validée !");
     setCart([]);
+    loadProducts();
   };
 
   const handleAddProduct = (product) => {
@@ -82,7 +125,7 @@ const ProductsPage = () => {
   const recentProducts = [...products]
   .sort((a, b) => new Date(b.addedAt) - new Date(a.addedAt))
   .slice(0, 3);
-
+  // console.log("contenu panier: ", cart)
 
   return (
     <div className="flex flex-col md:flex-row p-6 gap-6">
@@ -127,3 +170,4 @@ const ProductsPage = () => {
 };
 
 export default ProductsPage;
+

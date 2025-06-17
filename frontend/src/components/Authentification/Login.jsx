@@ -30,7 +30,8 @@ const Login = () => {
 
       if (res.ok) {
         // Tu peux stocker le token ici si nécessaire
-        // localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        // console.log("login effecture:data.user ", data.user)
         navigate('/home');
       } else {
         setErrorMessage(data.message || 'Email ou mot de passe incorrect.');
@@ -45,10 +46,10 @@ const Login = () => {
     <div className="min-h-screen bg-gradient-to-br from-green-100 via-teal-50 to-sky-100 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="flex justify-center mb-8">
-          <img src={logoUrl} alt="Shopsys Logo" className="h-50 w-auto" />
+          <img src={logoUrl} alt="Shopsys Logo" className="h-10 w-auto" />
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white shadow-xl rounded-xl px-8 pt-6 pb-8 mb-4">
+        <form onSubmit={handleSubmit} className=" bg-white shadow-xl rounded-xl px-8 pt-6 pb-8 mb-4">
           <h1 className="text-3xl font-bold text-center text-teal-700 mb-8">Connexion</h1>
 
           {errorMessage && (

@@ -10,8 +10,8 @@ const Sidebar = ({ recentProducts }) => {
       <ul className="space-y-2">
         {recentProducts.map(prod => (
           <li key={prod.id} className="text-sm text-gray-600 border-b pb-2">
-            <p className="font-medium">{prod.name}</p>
-            <p className="text-xs text-gray-500">{prod.category} — {prod.price}€</p>
+            <p className="font-medium">{prod.nom}</p>
+            <p className="text-xs text-gray-500">{prod.categorie?.nom} — {prod.prix}€</p>
           </li>
         ))}
       </ul>

@@ -1,42 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DashboardLayout from "../dashbord/DashboardLayout"
 
 
-const ventesData = [
-  {
-    id: 1,
-    date: "03/06/2025",
-    client: "Jean Dupont",
-    produit: "Clavier Mécanique",
-    quantite: 1,
-    total: 89.99,
-  },
-  {
-    id: 2,
-    date: "03/06/2025",
-    client: "Aïssata Barry",
-    produit: "Souris sans fil",
-    quantite: 2,
-    total: 50,
-  },
-  {
-    id: 3,
-    date: "02/06/2025",
-    client: "Mamadou Keita",
-    produit: "Casque Bluetooth",
-    quantite: 1,
-    total: 59.99,
-  },
-];
-
 export default function Ventes() {
   const [recherche, setRecherche] = useState("");
+  const [ventesData, setVentesData] = useState([])
+
+  useEffect(()=>{
+    const get_ventes_url = "http://localhost:8008/api/ventes"
+    fetch(get_ventes_url)
+      .then(res => res.json())
+      .then(data => setVentesData(data))
+      .catch(err => console.error("Erreur lors du chargement des donnees ventes:", err))
+  }, [])
+
 
   const ventesFiltrees = ventesData.filter((vente) =>
     vente.client.toLowerCase().includes(recherche.toLowerCase())
   );
 
-  const totalGlobal = ventesFiltrees.reduce((acc, curr) => acc + curr.total, 0);
+  const totalGlobal = ventesFiltrees.reduce((total, vente) => {
+    return total + parseFloat(vente.prix_total || 0);
+  }, 0);
+
 
   return (
     <DashboardLayout>
@@ -62,6 +48,7 @@ export default function Ventes() {
             <tr className="bg-teal-100 text-teal-800 text-sm sm:text-base">
               <th className="p-3 border border-teal-200 text-left">Date</th>
               <th className="p-3 border border-teal-200 text-left">Client</th>
+              <th className="p-3 border border-teal-200 text-left">Reference Client</th>
               <th className="p-3 border border-teal-200 text-left">Produit</th>
               <th className="p-3 border border-teal-200 text-left">Quantité</th>
               <th className="p-3 border border-teal-200 text-left">Total (€)</th>
@@ -70,12 +57,13 @@ export default function Ventes() {
           <tbody>
             {ventesFiltrees.map((vente) => (
               <tr key={vente.id} className="hover:bg-teal-50 text-sm sm:text-base">
-                <td className="p-3 border border-teal-100">{vente.date}</td>
+                <td className="p-3 border border-teal-100">{vente.date_vente}</td>
                 <td className="p-3 border border-teal-100">{vente.client}</td>
-                <td className="p-3 border border-teal-100">{vente.produit}</td>
+                <td className="p-3 border border-teal-100">{vente.ref_client}</td>
+                <td className="p-3 border border-teal-100">{vente.nom_produit}</td>
                 <td className="p-3 border border-teal-100">{vente.quantite}</td>
                 <td className="p-3 border border-teal-100 text-green-600 font-semibold">
-                  {vente.total.toFixed(2)}
+                  {vente.prix_total}
                 </td>
               </tr>
             ))}
