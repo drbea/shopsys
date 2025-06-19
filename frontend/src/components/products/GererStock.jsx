@@ -40,7 +40,7 @@ const GererStock = () => {
               <tr key={product.id}>
                 <td className="py-3 px-4">{product.nom}</td>
                 <td className="py-3 px-4">{product.quantite}</td>
-                <td className={`   ${product.quantite < 10 ? 'bg-red-600 text-white rounded m-2 px-1 text-center' : 'px-4'}`}>{product.quantite < 10 ? "rupture" : "disponible"}</td>
+                <td className={`py-3 px-4 ${product.quantite < 10 ? 'bg-red-600 text-white rounded text-center' : 'px-4 py-3'}`}>{product.quantite < 10 ? "rupture" : "disponible"}</td>
                 <td className="py-3 px-4">
                   <button className="text-sm bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded">Modifier</button>
                 </td>            

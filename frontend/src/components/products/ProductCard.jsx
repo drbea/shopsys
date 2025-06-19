@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { Link } from "react-router-dom";
 import EditProductModal from './EditProductModal'
@@ -16,6 +16,9 @@ const ProductCard = ({ product, onAddClick, handleDelete, onProductUpdated }) =>
 
   const [showEdit, setShowEdit] = useState(false);
 
+// const [showEdit, setShowEdit] = useState(false);
+const [showMenu, setShowMenu] = useState(false);
+
   const estIndisponible = quantite <= 0;
   const faibleStock = quantite > 0 && quantite < 10;
 
@@ -26,6 +29,42 @@ const ProductCard = ({ product, onAddClick, handleDelete, onProductUpdated }) =>
         src={image}
         alt={`Image de ${nom}`}
       />
+
+<div className="absolute top-2 right-2">
+  <button
+    onClick={() => setShowMenu(!showMenu)}
+    className="text-gray-700 hover:text-teal-700 focus:outline-none text-xl"
+    title="Options"
+  >
+    ⋮
+  </button>
+
+  {showMenu && (
+    <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-10 border border-gray-200">
+      <button
+        onClick={() => {
+          setShowEdit(true);
+          setShowMenu(false);
+        }}
+        className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+      >
+        Modifier
+      </button>
+      <button
+        onClick={() => {
+          handleDelete(product.id);
+          setShowMenu(false);
+        }}
+        className="block w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+      >
+        Supprimer
+      </button>
+    </div>
+  )}
+</div>
+
+
+      
       <div className="p-4">
         <h2 className="text-xl font-semibold text-gray-800">{nom}</h2>
         <p className="text-sm text-gray-500">{categorie_nom}</p>
@@ -67,12 +106,7 @@ const ProductCard = ({ product, onAddClick, handleDelete, onProductUpdated }) =>
               Ajouter au panier
             </button>
 
-            <button
-              onClick={() => handleDelete(product.id)}
-              className="bg-red-600 p-2 text-sm font-semibold rounded text-white hover:bg-white hover:text-red-600 hover:outline hover:outline-2 hover:outline-red-500 transition"
-            >
-              Supprimer
-            </button>
+
 
           </div>
         )}
@@ -81,6 +115,7 @@ const ProductCard = ({ product, onAddClick, handleDelete, onProductUpdated }) =>
       {/*modification*/}
       <div className="p-4 flex justify-between">
         <button
+          hidden
           onClick={() => setShowEdit(true)}
           className="bg-yellow-500 px-2 py-1 text-white text-sm rounded hover:bg-yellow-600"
         >

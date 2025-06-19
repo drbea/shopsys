@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 const AjouterProduit = () => {
   const [categories, setCategories] = useState([]);
-  const produitInfo = { nom: '', prix: '', quantite: '', categorie: '', image: null, codebarre: ""};
+  const produitInfo = { nom: '', prix: '', quantite: '', categorie: '', image: null, codebarre: '', detail: ''};
   const [produits, setProduit] = useState(produitInfo);
 
   useEffect(() => {
@@ -39,6 +39,7 @@ const AjouterProduit = () => {
     formData.append('quantite', produits.quantite);
     formData.append('categorie', categorieTrimmed);
     formData.append('codebarre', produits.codebarre.trim());
+    formData.append('detail', produits.detail.trim());
     if (produits.image) formData.append('image', produits.image);
 for (let pair of formData.entries()) {
   console.log(pair[0]+ ': ' + pair[1]);
@@ -50,9 +51,7 @@ for (let pair of formData.entries()) {
         method: "POST",
         body: formData
       });
-
       if (!res.ok) throw new Error("Erreur lors de l'ajout");
-
       alert("Produit ajouté avec succès !");
       setProduit(produitInfo);
     } catch (error) {
@@ -89,6 +88,20 @@ for (let pair of formData.entries()) {
               placeholder="Saisir le code-barres"
             />
           </div>
+
+          <div className="mb-4">
+            <label className="block mb-1">Detail</label>
+            <input
+              type="text"
+              name="detail"
+              value={produits.detail}
+              onChange={handleChange}
+              className="w-full border rounded px-4 py-2"
+              placeholder="Saisir le detail du produit"
+            />
+          </div>
+
+
           <div className="mb-4">
             <label className="block mb-1">Catégorie</label>
             <input
@@ -145,6 +158,8 @@ for (let pair of formData.entries()) {
               accept="image/*"
             />
           </div>
+
+
 
           <button type="submit" className="bg-teal-600 text-white px-6 py-2 rounded hover:bg-teal-700">
             Ajouter

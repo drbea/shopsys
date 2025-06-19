@@ -13,6 +13,7 @@ const frontend_url = process.env.FRONT_URL || "http://localhost:5173"
 const PORT = process.env.PORT || 5000
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true })); 
 
 app.use(cors({
     origin: "http://localhost:5173",

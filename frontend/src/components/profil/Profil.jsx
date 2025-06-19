@@ -34,6 +34,7 @@ export default function Profil() {
     e.preventDefault();
     localStorage.setItem("user", JSON.stringify(user));
     setEditMode(false);
+    console.log(loading)
   };
 
   return (

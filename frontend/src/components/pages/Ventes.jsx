@@ -26,7 +26,7 @@ export default function Ventes() {
 
   return (
     <DashboardLayout>
-          <div className="p-4 sm:p-6 bg-white rounded-xl shadow-md">
+      <div className="p-4 sm:p-6 bg-white rounded-xl shadow-md">
       <h1 className="text-2xl sm:text-3xl font-bold text-teal-700 mb-6">Historique des Ventes</h1>
 
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
@@ -68,7 +68,7 @@ export default function Ventes() {
               </tr>
             ))}
             {ventesFiltrees.length === 0 && (
-              <tr>
+              <tr key="ventes-non-trouvee">
                 <td colSpan="5" className="text-center p-4 text-gray-500">
                   Aucune vente trouvée.
                 </td>

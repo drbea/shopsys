@@ -19,7 +19,9 @@ router.get('/categories', (req, res) => {
 
 // Ajouter un produit
 router.post('/produits', upload.single('image'), (req, res) => {
-  const { nom, prix, quantite, categorie, codebarre } = req.body;
+  const { nom, prix, quantite, categorie, codebarre, detail } = req.body;
+// console.log("DETAIL reçu :", detail);
+
   const file = req.file;
 
   if (!file) {
@@ -33,7 +35,7 @@ router.post('/produits', upload.single('image'), (req, res) => {
     VALUES (?) 
     ON DUPLICATE KEY UPDATE id = LAST_INSERT_ID(id)
   `;
-
+  console.log("avant debut insertion")
   database.query(sqlCategorie, [categorie], (err, result) => {
     if (err) return res.status(500).json(err);
 
@@ -41,11 +43,12 @@ router.post('/produits', upload.single('image'), (req, res) => {
 
     const sqlProduit = `
       INSERT INTO produit 
-      (nom, prix, quantite, image, categorie, codebarre, addedAt) 
-      VALUES (?, ?, ?, ?, ?, ?, NOW())
+      (nom, prix, quantite, image, categorie, codebarre, detail, addedAt) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, NOW())
     `;
+  console.log("avant debut insertion")
 
-    database.query(sqlProduit, [nom, prix, quantite, image, categorieId, codebarre], (err2) => {
+    database.query(sqlProduit, [nom, prix, quantite, image, categorieId, codebarre, detail], (err2) => {
       if (err2) return res.status(500).json(err2);
       res.json({ message: 'Produit ajouté avec succès' });
     });

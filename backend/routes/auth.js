@@ -88,7 +88,7 @@ router.post("/logout", (req, res) => {
 });
 
 router.get("/me", (req, res) => {
-  console.log("Session utilisateur:", req.session);
+  // console.log("Session utilisateur:", req.session);
   if (req.session.user) {
     res.json({ user: req.session.user });
   } else {
