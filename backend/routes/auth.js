@@ -16,10 +16,10 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ message: "Email déjà utilisé" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const hashedPassword = await bcrypt.hash(password, 10);
 
     database.query("INSERT INTO utilisateur (prenom, nom, email, password) VALUES (?, ?, ?, ?)",
-      [prenom, nom, email, hashedPassword],
+      [prenom, nom, email, password],
       (err) => {
         if (err) return res.status(500).json({ message: "Erreur lors de l'inscription", error: err });
 
