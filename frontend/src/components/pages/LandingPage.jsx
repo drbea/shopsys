@@ -9,11 +9,10 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 via-teal-50 to-sky-100 flex flex-col items-center justify-center p-4">
       <header className="flex flex-col items-center mb-8">
-        {/* Logo Shopsys */}
         <img
-          src={logoUrl} 
+          src={logoUrl}
           alt="Shopsys Logo"
-          className="h-150 w-200 mb-6"
+          className="h-40 w-45 mb-6"
         />
       </header>
 
@@ -26,16 +25,6 @@ const LandingPage = () => {
           Découvrez <strong>Shopsys</strong>, la plateforme de gestion intuitive et complète conçue spécifiquement pour les supermarchés. Optimisez chaque aspect de votre activité, de la gestion rigoureuse des stocks à la fluidité des ventes, en passant par une expérience de caisse efficace.
         </p>
         <div className="mt-8">
-          {/* Bouton Se connecter */}
-          {/* Option 1: Lien simple HTML (si pas de router React)
-          <a
-            href="/connexion" // Remplacez par votre URL de page de connexion
-            className="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-lg"
-          >
-            Se connecter
-          </a> */}
-
-          {/* Option 2: Si vous utilisez react-router-dom */}
           <Link
             to="/login"
             className="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 text-lg"

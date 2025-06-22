@@ -38,7 +38,7 @@ app.use('/media', express.static(path.join(__dirname, 'uploads')));
 const authRoutes = require("./routes/auth");
 const produitsRoutes = require("./routes/produits");
 
-
+// bea
 app.use("/api", authRoutes);
 app.use("/api", produitsRoutes);
 
