@@ -185,4 +185,26 @@ router.get('/ventes', (req, res) => {
   });
 });
 
+// Route statistiques
+router.get('/statistiques', (req, res) => {
+  const sql = `
+    SELECT 
+      (SELECT COUNT(*) FROM produit) AS total_produits,
+      (SELECT COUNT(*) FROM produit WHERE quantite <= 10) AS rupture_stock,
+      (SELECT IFNULL(SUM(prix_total), 0) FROM ventes) AS total_caisse,
+      (SELECT IFNULL(SUM(prix_total), 0) FROM ventes WHERE DATE(date_vente) = CURDATE()) AS vente_du_jour,
+      (SELECT IFNULL(SUM(quantite), 0) FROM ventes) AS total_quantite_vendue,
+      (SELECT COUNT(*) FROM categorie) AS total_categories
+  `;
+
+  database.query(sql, (err, results) => {
+    if (err) {
+      console.error("Erreur lors de la récupération des statistiques :", err);
+      return res.status(500).json({ error: "Erreur serveur" });
+    }
+    res.json(results[0]);
+  });
+});
+
+
 module.exports = router;

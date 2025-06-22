@@ -1,62 +1,54 @@
+import React, { useEffect, useState } from 'react';
+import { FaBoxOpen, FaExclamationTriangle, FaMoneyBillWave, FaShoppingCart, FaChartPie, FaTags } from 'react-icons/fa';
+
 import DashboardLayout from "../dashbord/DashboardLayout"
-import { Link } from 'react-router-dom';
+const Dashboard = () => {
+  const [stats, setStats] = useState({
+    total_produits: 0,
+    rupture_stock: 0,
+    total_caisse: 0,
+    vente_du_jour: 0,
+    total_quantite_vendue: 0,
+    total_categories: 0
+  });
 
+  useEffect(() => {
+    fetch("http://localhost:8008/api/statistiques")
+      .then(res => res.json())
+      .then(data => setStats(data))
+      .catch(err => console.error("Erreur stats :", err));
+  }, []);
 
-
-function Home() {
+  const formatNumber = (n) => Number(n).toLocaleString("fr-FR");
 
   return (
     <DashboardLayout>
-      <div className="min-h-screen bg-gradient-to-br from-green-50 via-teal-50 to-sky-50 p-6">
-        <header className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-teal-700">Dashbord ShopSys</h1>
-          <Link to="/login" className="text-teal-600 hover:underline">
-            Déconnexion
-          </Link>
-        </header>
+      <div className="p-8 bg-gray-100 min-h-screen">
+        <h1 className="text-3xl font-bold text-gray-700 mb-6">Tableau de bord</h1>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <StatCard label="Produits en stock" value={stats.total_produits} icon={<FaBoxOpen />} color="bg-blue-500" />
+          <StatCard label="Ruptures de stock" value={stats.rupture_stock} icon={<FaExclamationTriangle />} color="bg-red-500" />
+          <StatCard label="Catégories" value={stats.total_categories} icon={<FaTags />} color="bg-yellow-500" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-lg p-6 shadow-md">
-            <h2 className="text-lg font-semibold text-gray-700">Produits</h2>
-            <p className="text-2xl font-bold text-teal-600">450</p>
-          </div>
-          <div className="bg-white rounded-lg p-6 shadow-md">
-            <h2 className="text-lg font-semibold text-gray-700">Ventes du jour</h2>
-            <p className="text-2xl font-bold text-teal-600">125</p>
-          </div>
-          <div className="bg-white rounded-lg p-6 shadow-md">
-            <h2 className="text-lg font-semibold text-gray-700">Montant caisse</h2>
-            <p className="text-2xl font-bold text-teal-600">1 200 000 GNF</p>
-          </div>
-          <div className="bg-white rounded-lg p-6 shadow-md">
-            <h2 className="text-lg font-semibold text-gray-700">Ruptures de stock</h2>
-            <p className="text-2xl font-bold text-red-500">6</p>
-          </div>
+          <StatCard label="Total en caisse (GNF)" value={formatNumber(stats.total_caisse)} icon={<FaMoneyBillWave />} color="bg-green-500" />
+          <StatCard label="Ventes du jour" value={formatNumber(stats.vente_du_jour)} icon={<FaShoppingCart />} color="bg-indigo-500" />
+          <StatCard label="Quantité vendue" value={formatNumber(stats.total_quantite_vendue)} icon={<FaChartPie />} color="bg-purple-500" />
         </div>
-
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-4 text-gray-700">Actions rapides</h3>
-            <ul className="space-y-2 text-teal-700 font-medium">
-              <li><Link to="/ajoutproduit" className="hover:underline">➕ Ajouter un produit</Link></li>
-              <li><Link to="/ajoutvente" className="hover:underline">🧾 Enregistrer une vente</Link></li>
-              <li><Link to="/stocks" className="hover:underline">📦 Gérer les stocks</Link></li>
-            </ul>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-4 text-gray-700">Activité récente</h3>
-            <ul className="text-sm text-gray-600 space-y-1">
-              <li>🛒 Vente de 3 articles (08:34)</li>
-              <li>📦 Stock ajouté pour "Eau minérale"</li>
-              <li>❗ Produit "Lait en poudre" en rupture</li>
-            </ul>
-          </div>
-        </section>
       </div>
     </DashboardLayout>
+  );
+};
 
-  )
-}
+const StatCard = ({ label, value, color, icon }) => (
+  <div className={`p-6 rounded-lg shadow-md text-white ${color} flex items-center justify-between transition-transform hover:scale-105 duration-200`}>
+    <div>
+      <div className="text-xl font-semibold">{label}</div>
+      <div className="text-3xl mt-2 font-bold">{value}</div>
+    </div>
+    <div className="text-4xl opacity-70">
+      {icon}
+    </div>
+  </div>
+);
 
-export default Home;
+export default Dashboard;
