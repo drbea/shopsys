@@ -45,7 +45,7 @@ const Dashboard = () => {
           <StatCard label="Catégories" value={stats.total_categories} icon={<FaTags />} color="bg-yellow-500" />
 
           <StatCard label="Total en caisse (GNF)" value={formatNumber(stats.total_caisse)} icon={<FaMoneyBillWave />} color="bg-green-500" />
-          <StatCard label="Ventes du jour" value={formatNumber(stats.vente_du_jour)} icon={<FaShoppingCart />} color="bg-indigo-500" />
+          <StatCard label="Ventes du jour" value={formatNumber(stats.vente_du_jour) + " GNF"} icon={<FaShoppingCart />} color="bg-indigo-500" />
           <StatCard label="Quantité vendue" value={formatNumber(stats.total_quantite_vendue)} icon={<FaChartPie />} color="bg-purple-500" />
         </div>
 
