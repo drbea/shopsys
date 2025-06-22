@@ -12,11 +12,25 @@ const Dashboard = () => {
     total_categories: 0
   });
 
+  const [recentProducts, setRecentProducts] = useState([]);
+  const [recentSales, setRecentSales] = useState([]);
+
+
   useEffect(() => {
     fetch("http://localhost:8008/api/statistiques")
       .then(res => res.json())
       .then(data => setStats(data))
       .catch(err => console.error("Erreur stats :", err));
+  }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:8008/api/activites-recentes')
+      .then(res => res.json())
+      .then(data => {
+        setRecentProducts(data.produitsRecents);
+        setRecentSales(data.ventesRecentes);
+      })
+      .catch(err => console.error("Erreur lors du chargement des activités :", err));
   }, []);
 
   const formatNumber = (n) => Number(n).toLocaleString("fr-FR");
@@ -34,7 +48,39 @@ const Dashboard = () => {
           <StatCard label="Ventes du jour" value={formatNumber(stats.vente_du_jour)} icon={<FaShoppingCart />} color="bg-indigo-500" />
           <StatCard label="Quantité vendue" value={formatNumber(stats.total_quantite_vendue)} icon={<FaChartPie />} color="bg-purple-500" />
         </div>
+
+        <div className="mt-15 ">
+        <h2 className="text-xl font-semibold text-gray-700 mb-4">📋 Dernières activités</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          {/* Derniers produits */}
+          <div className="bg-white rounded shadow p-4">
+            <h3 className="text-teal-700 font-semibold mb-2">🆕 Derniers produits</h3>
+            <ul className="text-sm text-gray-600 space-y-1">
+              {recentProducts.map(prod => (
+                <li key={prod.id}>
+                  <strong>{prod.nom}</strong> - {prod.prix}€ ({prod.categorie_nom})
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Dernières ventes */}
+          <div className="bg-white rounded shadow p-4">
+            <h3 className="text-teal-700 font-semibold mb-2">💸 Dernières ventes</h3>
+            <ul className="text-sm text-gray-600 space-y-1">
+              {recentSales.map(vente => (
+                <li key={vente.id_vente}>
+                  {vente.nom_produit} × {vente.quantite} – {vente.prix_total}€
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
+      </div>
+
     </DashboardLayout>
   );
 };

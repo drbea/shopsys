@@ -206,5 +206,42 @@ router.get('/statistiques', (req, res) => {
   });
 });
 
+// Activités récentes : produits + ventes
+router.get('/activites-recentes', (req, res) => {
+  const sqlProduits = `
+    SELECT produit.id, produit.nom, produit.prix, produit.addedAt, categorie.nom AS categorie_nom
+    FROM produit
+    JOIN categorie ON produit.categorie = categorie.id
+    ORDER BY produit.addedAt DESC
+    LIMIT 5
+  `;
+
+  const sqlVentes = `
+    SELECT id_vente, nom_produit, quantite, prix_total, date_vente
+    FROM ventes
+    ORDER BY date_vente DESC
+    LIMIT 5
+  `;
+
+  database.query(sqlProduits, (errProduits, produits) => {
+    if (errProduits) {
+      console.error("Erreur lors de la récupération des produits récents :", errProduits);
+      return res.status(500).json({ error: "Erreur produits" });
+    }
+
+    database.query(sqlVentes, (errVentes, ventes) => {
+      if (errVentes) {
+        console.error("Erreur lors de la récupération des ventes récentes :", errVentes);
+        return res.status(500).json({ error: "Erreur ventes" });
+      }
+
+      res.json({
+        produitsRecents: produits,
+        ventesRecentes: ventes
+      });
+    });
+  });
+});
+
 
 module.exports = router;
